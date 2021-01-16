@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dialogflow/dialogflow_v2.dart';
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
+class ChatBot extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    //return Scaffold();
 
-    /*return new MaterialApp(
+    return new MaterialApp(
       title: 'Example Dialogflow Flutter',
       theme: new ThemeData(
         primarySwatch: Colors.deepOrange,
@@ -16,7 +14,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: new HomePageDialogflow(),
     );
-    */
   }
 }
 
