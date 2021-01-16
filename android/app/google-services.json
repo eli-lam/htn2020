@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1078214197726",
+    "project_id": "feelix-jmfm",
+    "storage_bucket": "feelix-jmfm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1078214197726:android:287634f6cc188f9fa45d4f",
+        "android_client_info": {
+          "package_name": "com.example.moodTracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1078214197726-2dv5blrepteb1nsvbchhsu71f1dete86.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVL9QRO0oIEBN_FR9JQXJ1Fb8xy6XeZtk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1078214197726-2dv5blrepteb1nsvbchhsu71f1dete86.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
