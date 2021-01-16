@@ -84,7 +84,7 @@ class _HomePageDialogflow extends State<HomePageDialogflow> {
     _textController.clear();
     ChatMessage message = new ChatMessage(
       text: text,
-      name: "Kailey",
+      name: "You",
       type: true,
     );
     setState(() {
