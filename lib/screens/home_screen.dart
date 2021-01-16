@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mood_tracker/config/palette.dart';
 import 'package:mood_tracker/config/styles.dart';
+import 'package:mood_tracker/widgets/past_week_cards.dart';
 import 'package:mood_tracker/widgets/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -88,8 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
   SliverToBoxAdapter _buildPast7Days(double screenHeight) {
     return SliverToBoxAdapter(
       child: Container(
-        padding: const EdgeInsets.all(20.0),
-        color: Colors.orange,
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -101,6 +101,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 fontStyle: FontStyle.italic,
               ),
             ),
+            SizedBox(height: screenHeight * 0.01),
+            PastWeekCards(),
           ],
         ),
       ),
