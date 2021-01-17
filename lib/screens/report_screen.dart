@@ -23,14 +23,29 @@ class _ReportScreenState extends State<ReportScreen> {
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (!snapshot.hasData)
               return new Center(child: new CircularProgressIndicator());
+            List<Column> loWidg = [];
+            snapshot.data.documents.forEach((doc) => {
+                  loWidg.add(Column(children: [
+                    Column(children: <Widget>[
+                      Text(doc['emotion']),
+                      Text(DateFormat.yMMMd().format(doc['date'].toDate()))
+                    ])
+                  ]))
+                });
+            snapshot.data.documents.asMap().forEach((k, doc) => {
+                  loWidg[k].children.add(Image.asset(
+                      'assets/' + doc['emotion'] + '.png',
+                      height: 50,
+                      width: 50))
+                });
             return new Center(
-                child: new Container(
-                    child: new Column(
-                        children: snapshot.data.documents
-                            .map((doc) => new Text(doc['emotion'] +
-                                DateFormat.yMMMd()
-                                    .format(doc['date'].toDate())))
-                            .toList())));
+              child: new Container(
+                margin: EdgeInsets.symmetric(vertical: 5.0),
+                height: MediaQuery.of(context).size.height * 0.17,
+                child: ListView(
+                    scrollDirection: Axis.horizontal, children: loWidg),
+              ),
+            );
           },
         ));
   }
