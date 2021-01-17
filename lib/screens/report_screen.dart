@@ -60,7 +60,7 @@ class _ReportScreenState extends State<ReportScreen> {
             Text(
               'Your Mood',
               style: const TextStyle(
-                fontSize: 18.0,
+                fontSize: 16.0,
                 fontWeight: FontWeight.bold,
                 fontStyle: FontStyle.italic,
               ),
@@ -202,7 +202,7 @@ class _ReportScreenState extends State<ReportScreen> {
               child: Text(
                 'Most and Least Experienced Moods',
                 style: const TextStyle(
-                  fontSize: 18.0,
+                  fontSize: 16.0,
                   fontWeight: FontWeight.bold,
                   fontStyle: FontStyle.italic,
                 ),
@@ -261,7 +261,7 @@ class _ReportScreenState extends State<ReportScreen> {
                 emotion.toUpperCase(),
                 style: const TextStyle(
                   color: Colors.black87,
-                  fontSize: 18.0,
+                  fontSize: 16.0,
                   fontWeight: FontWeight.bold,
                 ),
               ),
