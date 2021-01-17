@@ -23,7 +23,7 @@ class ChatBot extends StatelessWidget {
         primarySwatch: MaterialColor(0xFF757797, color),
       ),
       debugShowCheckedModeBanner: false,
-      home: new HomePageDialogflow(),
+      home: HomePageDialogflow(),
     );
   }
 }
@@ -34,12 +34,12 @@ class HomePageDialogflow extends StatefulWidget {
   final String title;
 
   @override
-  _HomePageDialogflow createState() => new _HomePageDialogflow();
+  _HomePageDialogflow createState() => _HomePageDialogflow();
 }
 
 class _HomePageDialogflow extends State<HomePageDialogflow> {
   final List<ChatMessage> _messages = <ChatMessage>[];
-  final TextEditingController _textController = new TextEditingController();
+  final TextEditingController _textController = TextEditingController();
 
   Widget _buildTextComposer() {
     return ListTile(
@@ -51,17 +51,17 @@ class _HomePageDialogflow extends State<HomePageDialogflow> {
         onPressed: () {},
       ),
       title: Container(
-        height: 40,
+        height: 45,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(15)),
-          color: Color.fromRGBO(220, 220, 220, 1),
+          color: Color(0xFFF6F2FF),
         ),
-        padding: EdgeInsets.only(
-          left: 15,
+        padding: EdgeInsets.symmetric(
+          horizontal: 15,
         ),
         child: TextFormField(
           controller: _textController,
-          decoration: new InputDecoration(
+          decoration: InputDecoration(
             hintText: "Send a message",
             hintStyle: TextStyle(color: Colors.black26),
             border: InputBorder.none,
@@ -76,7 +76,7 @@ class _HomePageDialogflow extends State<HomePageDialogflow> {
           icon: Icon(
             Icons.send_rounded,
             size: 30.0,
-            color: Colors.greenAccent,
+            color: Color(0xFF4F8BFF),
           ),
           onPressed: () {
             if (_textController.text.isEmpty) {
@@ -99,9 +99,9 @@ class _HomePageDialogflow extends State<HomePageDialogflow> {
     Dialogflow dialogflow =
         Dialogflow(authGoogle: authGoogle, language: Language.english);
     AIResponse response = await dialogflow.detectIntent(query);
-    ChatMessage message = new ChatMessage(
+    ChatMessage message = ChatMessage(
       text: response.getMessage() ??
-          new CardDialogflow(response.getListMessage()[0]).title,
+          CardDialogflow(response.getListMessage()[0]).title,
       name: "Feelix",
       type: false,
     );
@@ -113,7 +113,7 @@ class _HomePageDialogflow extends State<HomePageDialogflow> {
 
   void _handleSubmitted(String text) {
     _textController.clear();
-    ChatMessage message = new ChatMessage(
+    ChatMessage message = ChatMessage(
       text: text,
       name: "You",
       type: true,
@@ -126,22 +126,23 @@ class _HomePageDialogflow extends State<HomePageDialogflow> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
         centerTitle: true,
-        title: new Text("Chat"),
+        title: Text("Chat"),
       ),
-      body: new Column(
+      body: Column(
         children: <Widget>[
-          new Flexible(
-            child: new ListView.builder(
-              padding: new EdgeInsets.all(8.0),
+          Flexible(
+            child: ListView.builder(
+              padding: EdgeInsets.all(8.0),
               reverse: true,
               itemBuilder: (_, int index) => _messages[index],
               itemCount: _messages.length,
             ),
           ),
-          new Container(
+          Container(
             padding: EdgeInsets.only(bottom: 10),
             child: _buildTextComposer(),
           ),
@@ -163,21 +164,21 @@ class ChatMessage extends StatelessWidget {
       Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          new Container(
+          Container(
             margin: const EdgeInsets.all(15.0),
-            child: new CircleAvatar(
-                backgroundImage: AssetImage('assets/feelix.png')),
+            child:
+                CircleAvatar(backgroundImage: AssetImage('assets/feelix.png')),
           ),
-          new Container(
+          Container(
             constraints: BoxConstraints(maxWidth: 275),
             child: Card(
               color: Color(0xFFF6F2FF),
               elevation: 0.0,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
-                  topLeft: new Radius.circular(15.0),
-                  topRight: new Radius.circular(15.0),
-                  bottomRight: new Radius.circular(15.0),
+                  topLeft: Radius.circular(15.0),
+                  topRight: Radius.circular(15.0),
+                  bottomRight: Radius.circular(15.0),
                   //bottomLeft: new Radius.circular(20.0),
                 ),
               ),
@@ -185,13 +186,13 @@ class ChatMessage extends StatelessWidget {
                 alignment: Alignment.center,
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8.0),
-                  child: new Column(
+                  child: Column(
                     children: <Widget>[
-                      new Text(this.name,
-                          style: new TextStyle(fontWeight: FontWeight.bold)),
-                      new Container(
+                      Text(this.name,
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                      Container(
                         margin: const EdgeInsets.only(top: 5.0),
-                        child: new Text(text),
+                        child: Text(text),
                       ),
                     ],
                   ),
@@ -210,23 +211,24 @@ class ChatMessage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Container(
+            constraints: BoxConstraints(maxWidth: 275),
             child: Card(
               color: Color(0xFF4F8BFF),
               elevation: 0.0,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
-                    topLeft: new Radius.circular(15.0),
-                    topRight: new Radius.circular(15.0),
-                    bottomLeft: new Radius.circular(15.0)),
+                    topLeft: Radius.circular(15.0),
+                    topRight: Radius.circular(15.0),
+                    bottomLeft: Radius.circular(15.0)),
               ),
               child: Align(
                 alignment: Alignment.center,
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8.0),
-                  child: new Column(
+                  child: Column(
                     children: <Widget>[
-                      new Container(
-                        child: new Text(
+                      Container(
+                        child: Text(
                           text,
                           style: const TextStyle(
                               color: Color.fromRGBO(255, 255, 255, 1)),
