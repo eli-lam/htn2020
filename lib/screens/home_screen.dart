@@ -4,6 +4,8 @@ import 'package:mood_tracker/config/styles.dart';
 import 'package:mood_tracker/widgets/tip_of_the_day.dart';
 import 'package:mood_tracker/widgets/widgets.dart';
 
+import 'screens.dart';
+
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -69,13 +71,18 @@ class _HomeScreenState extends State<HomeScreen> {
                     vertical: 14.0,
                     horizontal: 24.0,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(
+                            builder: (context) => FeelixButtonScreen()),
+                        (Route<dynamic> route) => false);
+                  },
                   color: Colors.black54,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
                   ),
                   child: Text(
-                    'Talk to the chatbot',
+                    'Chat with Feelix',
                     style: Styles.buttonTextStyle,
                   ),
                   textColor: Colors.white,

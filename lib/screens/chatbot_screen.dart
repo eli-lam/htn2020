@@ -42,29 +42,53 @@ class _HomePageDialogflow extends State<HomePageDialogflow> {
   final TextEditingController _textController = new TextEditingController();
 
   Widget _buildTextComposer() {
-    return new IconTheme(
-      data: new IconThemeData(color: Theme.of(context).accentColor),
-      child: new Container(
-        margin: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: new Row(
-          children: <Widget>[
-            new Flexible(
-              child: new TextField(
-                controller: _textController,
-                onSubmitted: _handleSubmitted,
-                decoration:
-                    new InputDecoration.collapsed(hintText: "Send a message"),
-              ),
-            ),
-            new Container(
-              margin: new EdgeInsets.symmetric(horizontal: 4.0),
-              child: new IconButton(
-                  icon: new Icon(Icons.send),
-                  onPressed: () => _handleSubmitted(_textController.text)),
-            ),
-          ],
+    return ListTile(
+      leading: IconButton(
+        icon: Icon(
+          Icons.mic_rounded,
+          size: 35,
+        ),
+        onPressed: () {},
+      ),
+      title: Container(
+        height: 40,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(15)),
+          color: Color.fromRGBO(220, 220, 220, 1),
+        ),
+        padding: EdgeInsets.only(
+          left: 15,
+        ),
+        child: TextFormField(
+          controller: _textController,
+          decoration: new InputDecoration(
+            hintText: "Send a message",
+            hintStyle: TextStyle(color: Colors.black26),
+            border: InputBorder.none,
+            focusedBorder: InputBorder.none,
+            enabledBorder: InputBorder.none,
+            errorBorder: InputBorder.none,
+            disabledBorder: InputBorder.none,
+          ),
         ),
       ),
+      trailing: IconButton(
+          icon: Icon(
+            Icons.send_rounded,
+            size: 30.0,
+            color: Colors.greenAccent,
+          ),
+          onPressed: () {
+            if (_textController.text.isEmpty) {
+              print("empty message");
+            } else {
+              _handleSubmitted(_textController.text);
+            }
+            FocusScopeNode currentFocus = FocusScope.of(context);
+            if (!currentFocus.hasPrimaryFocus) {
+              currentFocus.unfocus();
+            }
+          }),
     );
   }
 
@@ -107,20 +131,22 @@ class _HomePageDialogflow extends State<HomePageDialogflow> {
         centerTitle: true,
         title: new Text("Chat"),
       ),
-      body: new Column(children: <Widget>[
-        new Flexible(
+      body: new Column(
+        children: <Widget>[
+          new Flexible(
             child: new ListView.builder(
-          padding: new EdgeInsets.all(8.0),
-          reverse: true,
-          itemBuilder: (_, int index) => _messages[index],
-          itemCount: _messages.length,
-        )),
-        new Divider(height: 1.0),
-        new Container(
-          decoration: new BoxDecoration(color: Theme.of(context).cardColor),
-          child: _buildTextComposer(),
-        ),
-      ]),
+              padding: new EdgeInsets.all(8.0),
+              reverse: true,
+              itemBuilder: (_, int index) => _messages[index],
+              itemCount: _messages.length,
+            ),
+          ),
+          new Container(
+            padding: EdgeInsets.only(bottom: 10),
+            child: _buildTextComposer(),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -134,84 +160,94 @@ class ChatMessage extends StatelessWidget {
 
   List<Widget> otherMessage(context) {
     return <Widget>[
-      new Container(
-        margin: const EdgeInsets.only(right: 16.0),
-        child: new CircleAvatar(child: new Image.asset('assets/feelix.png')),
-      ),
-      new Container(
-        child: Card(
-          color: Color(0xFFF6F2FF),
-          elevation: 0.0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              topLeft: new Radius.circular(15.0),
-              topRight: new Radius.circular(15.0),
-              bottomRight: new Radius.circular(15.0),
-              //bottomLeft: new Radius.circular(20.0),
-            ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          new Container(
+            margin: const EdgeInsets.all(15.0),
+            child: new CircleAvatar(
+                backgroundImage: AssetImage('assets/feelix.png')),
           ),
-          child: Align(
-            alignment: Alignment.center,
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8.0),
-              child: new Column(
-                children: <Widget>[
-                  new Text(this.name,
-                      style: new TextStyle(fontWeight: FontWeight.bold)),
-                  new Container(
-                    margin: const EdgeInsets.only(top: 5.0),
-                    child: new Text(text),
+          new Container(
+            constraints: BoxConstraints(maxWidth: 275),
+            child: Card(
+              color: Color(0xFFF6F2FF),
+              elevation: 0.0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  topLeft: new Radius.circular(15.0),
+                  topRight: new Radius.circular(15.0),
+                  bottomRight: new Radius.circular(15.0),
+                  //bottomLeft: new Radius.circular(20.0),
+                ),
+              ),
+              child: Align(
+                alignment: Alignment.center,
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8.0),
+                  child: new Column(
+                    children: <Widget>[
+                      new Text(this.name,
+                          style: new TextStyle(fontWeight: FontWeight.bold)),
+                      new Container(
+                        margin: const EdgeInsets.only(top: 5.0),
+                        child: new Text(text),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
           ),
-        ),
-      ),
+        ],
+      )
     ];
   }
 
   List<Widget> myMessage(context) {
     return <Widget>[
-      new Container(
-        margin: new EdgeInsets.only(left: 280),
-        child: Card(
-          color: Color(0xFF4F8BFF),
-          elevation: 0.0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                topLeft: new Radius.circular(15.0),
-                topRight: new Radius.circular(15.0),
-                bottomLeft: new Radius.circular(15.0)),
-          ),
-          child: Align(
-            alignment: Alignment.center,
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8.0),
-              child: new Column(
-                children: <Widget>[
-                  new Container(
-                    child: new Text(
-                      text,
-                      style: const TextStyle(
-                          color: Color.fromRGBO(255, 255, 255, 1)),
-                    ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Container(
+            child: Card(
+              color: Color(0xFF4F8BFF),
+              elevation: 0.0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                    topLeft: new Radius.circular(15.0),
+                    topRight: new Radius.circular(15.0),
+                    bottomLeft: new Radius.circular(15.0)),
+              ),
+              child: Align(
+                alignment: Alignment.center,
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8.0),
+                  child: new Column(
+                    children: <Widget>[
+                      new Container(
+                        child: new Text(
+                          text,
+                          style: const TextStyle(
+                              color: Color.fromRGBO(255, 255, 255, 1)),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
           ),
-        ),
+        ],
       ),
     ];
   }
 
   @override
   Widget build(BuildContext context) {
-    return new Container(
+    return Container(
       margin: const EdgeInsets.symmetric(vertical: 10.0),
-      child: new Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Column(
         children: this.type ? myMessage(context) : otherMessage(context),
       ),
     );

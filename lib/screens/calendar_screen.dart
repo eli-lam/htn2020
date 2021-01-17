@@ -13,6 +13,8 @@ class _CalendarScreenState extends State<CalendarScreen>
     with TickerProviderStateMixin {
   CalendarController _calendarController;
   AnimationController _animationController;
+  bool _isShowingMore = false;
+  bool _isShowMoreButtonVisible = true;
 
   @override
   void initState() {
@@ -41,7 +43,16 @@ class _CalendarScreenState extends State<CalendarScreen>
               endIndent: 20,
             ),
             _buildMoodInfoBox(context),
-            _buildReadMoreButton(),
+            Visibility(
+              visible: _isShowMoreButtonVisible,
+              child: _calendarController.calendarFormat == CalendarFormat.month
+                  ? _buildReadMoreButton()
+                  : Container(),
+            ),
+            Visibility(
+              visible: _isShowingMore,
+              child: _buildReadMoreInfo(),
+            ),
           ],
         ),
       ),
@@ -196,6 +207,10 @@ class _CalendarScreenState extends State<CalendarScreen>
   }
 
   Container _buildReadMoreButton() {
+    setState(() {
+      _isShowMoreButtonVisible = true;
+    });
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Row(
@@ -206,7 +221,7 @@ class _CalendarScreenState extends State<CalendarScreen>
               vertical: 14.0,
               horizontal: 24.0,
             ),
-            onPressed: () => {_calendarController.toggleCalendarFormat()},
+            onPressed: () => {showMore()},
             color: Colors.black54,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(25.0),
@@ -216,6 +231,79 @@ class _CalendarScreenState extends State<CalendarScreen>
               style: Styles.buttonTextStyle,
             ),
             textColor: Colors.white,
+          ),
+        ],
+      ),
+    );
+  }
+
+  void showMore() {
+    setState(() {
+      _calendarController.toggleCalendarFormat();
+    });
+
+    setState(() {
+      _isShowMoreButtonVisible = false;
+    });
+
+    setState(() {
+      _isShowingMore = !_isShowingMore;
+    });
+  }
+
+  Container _buildReadMoreInfo() {
+    return Container(
+      margin: const EdgeInsets.all(16.0),
+      height: MediaQuery.of(context).size.height * 0.17,
+      decoration: BoxDecoration(
+        color: Palette.secondaryColor,
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      padding: const EdgeInsets.all(12.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            'CHAT HISTORY',
+            style: const TextStyle(
+              fontSize: 12.0,
+              color: Colors.black45,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Container(
+            height: MediaQuery.of(context).size.height * 0.115,
+            child: Row(
+              children: <Widget>[
+                Image.asset('assets/Happy.png'),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          'Happy',
+                          style: const TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.01),
+                        Text(
+                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consectetur nec convallis massa cursus. Etiam id.',
+                          style: const TextStyle(
+                            fontSize: 12.0,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
