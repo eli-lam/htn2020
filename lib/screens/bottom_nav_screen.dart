@@ -12,8 +12,8 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
     HomeScreen(),
     CalendarScreen(),
     ChatBot(),
+    ReportScreen(),
     Scaffold(),
-    AccountScreen(),
   ];
 
   int _currentIndex = 0;
