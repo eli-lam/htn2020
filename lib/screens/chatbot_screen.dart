@@ -18,7 +18,7 @@ class ChatBot extends StatelessWidget {
       900: Color.fromRGBO(117, 119, 151, 1),
     };
     return new MaterialApp(
-      title: 'Example Dialogflow Flutter',
+      title: 'Dialogflow Flutter',
       theme: new ThemeData(
         primarySwatch: MaterialColor(0xFF757797, color),
       ),
@@ -129,7 +129,6 @@ class _HomePageDialogflow extends State<HomePageDialogflow> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        centerTitle: true,
         title: Text("Chat"),
       ),
       body: Column(

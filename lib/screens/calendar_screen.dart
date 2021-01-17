@@ -170,7 +170,7 @@ class _CalendarScreenState extends State<CalendarScreen>
             height: MediaQuery.of(context).size.height * 0.115,
             child: Row(
               children: <Widget>[
-                Image.asset('assets/Happy.png'),
+                Image.asset('assets/happy.png'),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(5.0),

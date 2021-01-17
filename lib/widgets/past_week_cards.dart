@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mood_tracker/config/palette.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
 class PastWeekCards extends StatelessWidget {
   @override
@@ -10,17 +12,21 @@ class PastWeekCards extends StatelessWidget {
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: <Widget>[
-          _buildDailyCard('assets/Happy.png', '17', context),
-          _buildDailyCard('assets/anxious.png', '16', context),
-          _buildDailyCard('assets/proud.png', '15', context),
-          _buildDailyCard('assets/angry.png', '14', context),
-          _buildDailyCard('assets/burned_out.png', '13', context),
-          _buildDailyCard('assets/frustrated.png', '12', context),
-          _buildDailyCard('assets/excited.png', '11', context),
+          _buildDailyCard('assets/sad.png', '17', context),
+          _buildDailyCard('assets/proud.png', '16', context),
+          _buildDailyCard('assets/bored.png', '15', context),
+          _buildDailyCard('assets/motivated.png', '14', context),
+          _buildDailyCard('assets/frustrated.png', '13', context),
+          _buildDailyCard('assets/stressed.png', '12', context),
+          _buildDailyCard('assets/happy.png', '11', context),
         ],
       ),
+      //getDataFromDatabase(),
     );
   }
+
+  CollectionReference collectionReference =
+      Firestore.instance.collection('emotions');
 
   Container _buildDailyCard(
       String imageVal, String date, BuildContext context) {
@@ -59,5 +65,26 @@ class PastWeekCards extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget getDataFromDatabase() {
+    List<Widget> loWidg = [];
+    StreamBuilder<QuerySnapshot>(
+        // define a StreamBuilder of type QuerySnapshot
+        stream: collectionReference
+            .snapshots(), // use snapshots() function on a CollectionReference
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (!snapshot.hasData)
+            return new Center(child: new CircularProgressIndicator());
+          snapshot.data.documents.forEach((doc) => {
+                loWidg.add(_buildDailyCard('assets/' + doc['emotion'] + '.png',
+                    DateFormat.yMMMd().format(doc['date'].toDate()), context))
+              });
+          return ListView(
+            scrollDirection: Axis.horizontal,
+            children: loWidg,
+          );
+        });
+    return Container();
   }
 }
