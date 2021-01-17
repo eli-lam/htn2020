@@ -30,7 +30,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
         showUnselectedLabels: false,
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.grey,
-        elevation: 0.0,
+        elevation: 20.0,
         items: [
           Icons.home_rounded,
           Icons.calendar_today,

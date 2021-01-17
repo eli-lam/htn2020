@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mood_tracker/config/palette.dart';
 import 'package:mood_tracker/config/styles.dart';
-import 'package:mood_tracker/widgets/past_week_cards.dart';
 import 'package:mood_tracker/widgets/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -20,6 +19,8 @@ class _HomeScreenState extends State<HomeScreen> {
         slivers: <Widget>[
           _buildHeader(screenHeight),
           _buildPast7Days(screenHeight),
+          _buildKeywords(screenHeight),
+          _buildTipOfTheDay(screenHeight),
         ],
       ),
     );
@@ -103,6 +104,96 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             SizedBox(height: screenHeight * 0.01),
             PastWeekCards(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  SliverToBoxAdapter _buildKeywords(double screenHeight) {
+    return SliverToBoxAdapter(
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              'Keywords',
+              style: const TextStyle(
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+                fontStyle: FontStyle.italic,
+              ),
+            ),
+            SizedBox(height: screenHeight * 0.01),
+            Text(
+              'Here are the top 5 keywords that you frequently mentioned in a conversation with the chatbot in the past 7 days',
+              style: const TextStyle(
+                fontSize: 12.0,
+              ),
+            ),
+            SizedBox(height: screenHeight * 0.02),
+            Top5Keywords(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  SliverToBoxAdapter _buildTipOfTheDay(double screenHeight) {
+    return SliverToBoxAdapter(
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              'Tip of the Day',
+              style: const TextStyle(
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+                fontStyle: FontStyle.italic,
+              ),
+            ),
+            SizedBox(height: screenHeight * 0.01),
+            Container(
+              height: screenHeight * 0.15,
+              decoration: BoxDecoration(
+                color: Palette.secondaryColor,
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Image.asset('assets/Happy.png'),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            'Have a calming cup of tea',
+                            style: const TextStyle(
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: screenHeight * 0.01),
+                          Text(
+                            'Chamomile tea reduces irritability, stress and anxiety. It also helps to relax your muscles.',
+                            style: const TextStyle(
+                              fontSize: 12.0,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),

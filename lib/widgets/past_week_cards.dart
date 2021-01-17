@@ -10,19 +10,20 @@ class PastWeekCards extends StatelessWidget {
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: <Widget>[
-          DailyCards('assets/Happy.png', '11', context),
-          DailyCards('assets/Happy.png', '12', context),
-          DailyCards('assets/Happy.png', '13', context),
-          DailyCards('assets/Happy.png', '14', context),
-          DailyCards('assets/Happy.png', '15', context),
-          DailyCards('assets/Happy.png', '16', context),
-          DailyCards('assets/Happy.png', '17', context),
+          _buildDailyCard('assets/Happy.png', '11', context),
+          _buildDailyCard('assets/Happy.png', '12', context),
+          _buildDailyCard('assets/Happy.png', '13', context),
+          _buildDailyCard('assets/Happy.png', '14', context),
+          _buildDailyCard('assets/Happy.png', '15', context),
+          _buildDailyCard('assets/Happy.png', '16', context),
+          _buildDailyCard('assets/Happy.png', '17', context),
         ],
       ),
     );
   }
 
-  Container DailyCards(String imageVal, String date, BuildContext context) {
+  Container _buildDailyCard(
+      String imageVal, String date, BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.23,
       child: Card(
