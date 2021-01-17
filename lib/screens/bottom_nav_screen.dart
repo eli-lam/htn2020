@@ -21,45 +21,39 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _screens[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) => setState(() => _currentIndex = index),
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.white,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.grey,
-        elevation: 20.0,
-        items: [
-          Icons.home_rounded,
-          Icons.calendar_today,
-          Icons.chat_bubble_outline,
-          Icons.article_outlined,
-          Icons.person_outline
-        ]
-            .asMap()
-            .map((key, value) => MapEntry(
-                  key,
-                  BottomNavigationBarItem(
-                    title: Text(''),
-                    icon: Container(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 6.0,
-                        horizontal: 16.0,
-                      ),
-                      decoration: BoxDecoration(
-                        color: _currentIndex == key
-                            ? Colors.blue[600]
-                            : Colors.transparent,
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: Icon(value),
-                    ),
-                  ),
-                ))
-            .values
-            .toList(),
+      bottomNavigationBar: SizedBox(
+        height: MediaQuery.of(context).size.height * 0.095,
+        child: BottomNavigationBar(
+          currentIndex: _currentIndex,
+          onTap: (index) => setState(() => _currentIndex = index),
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Colors.white,
+          selectedItemColor: Color(0xFF4A64D7),
+          unselectedItemColor: Colors.grey,
+          elevation: 16.0,
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home_rounded),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.calendar_today),
+              label: 'Calendar',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.chat_bubble_outline),
+              label: 'Chat',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.article_outlined),
+              label: 'Reports',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person_outline),
+              label: 'Account',
+            ),
+          ],
+        ),
       ),
     );
   }
