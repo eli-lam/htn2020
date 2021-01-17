@@ -5,11 +5,22 @@ class ChatBot extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //return Scaffold();
-
+    Map<int, Color> color = {
+      50: Color.fromRGBO(117, 119, 151, .1),
+      100: Color.fromRGBO(117, 119, 151, .2),
+      200: Color.fromRGBO(117, 119, 151, .3),
+      300: Color.fromRGBO(117, 119, 151, .4),
+      400: Color.fromRGBO(117, 119, 151, .5),
+      500: Color.fromRGBO(117, 119, 151, .6),
+      600: Color.fromRGBO(117, 119, 151, .7),
+      700: Color.fromRGBO(117, 119, 151, .8),
+      800: Color.fromRGBO(117, 119, 151, .9),
+      900: Color.fromRGBO(117, 119, 151, 1),
+    };
     return new MaterialApp(
       title: 'Example Dialogflow Flutter',
       theme: new ThemeData(
-        primarySwatch: Colors.deepOrange,
+        primarySwatch: MaterialColor(0xFF757797, color),
       ),
       debugShowCheckedModeBanner: false,
       home: new HomePageDialogflow(),
@@ -94,7 +105,7 @@ class _HomePageDialogflow extends State<HomePageDialogflow> {
     return new Scaffold(
       appBar: new AppBar(
         centerTitle: true,
-        title: new Text("Flutter and Dialogflow"),
+        title: new Text("Chat"),
       ),
       body: new Column(children: <Widget>[
         new Flexible(
@@ -125,19 +136,36 @@ class ChatMessage extends StatelessWidget {
     return <Widget>[
       new Container(
         margin: const EdgeInsets.only(right: 16.0),
-        child: new CircleAvatar(child: new Text('B')),
+        child: new CircleAvatar(child: new Image.asset('assets/feelix.png')),
       ),
-      new Expanded(
-        child: new Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            new Text(this.name,
-                style: new TextStyle(fontWeight: FontWeight.bold)),
-            new Container(
-              margin: const EdgeInsets.only(top: 5.0),
-              child: new Text(text),
+      new Container(
+        child: Card(
+          color: Color(0xFFF6F2FF),
+          elevation: 0.0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: new Radius.circular(15.0),
+              topRight: new Radius.circular(15.0),
+              bottomRight: new Radius.circular(15.0),
+              //bottomLeft: new Radius.circular(20.0),
             ),
-          ],
+          ),
+          child: Align(
+            alignment: Alignment.center,
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8.0),
+              child: new Column(
+                children: <Widget>[
+                  new Text(this.name,
+                      style: new TextStyle(fontWeight: FontWeight.bold)),
+                  new Container(
+                    margin: const EdgeInsets.only(top: 5.0),
+                    child: new Text(text),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     ];
@@ -145,25 +173,35 @@ class ChatMessage extends StatelessWidget {
 
   List<Widget> myMessage(context) {
     return <Widget>[
-      new Expanded(
-        child: new Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: <Widget>[
-            new Text(this.name, style: Theme.of(context).textTheme.subtitle1),
-            new Container(
-              margin: const EdgeInsets.only(top: 5.0),
-              child: new Text(text),
-            ),
-          ],
-        ),
-      ),
       new Container(
-        margin: const EdgeInsets.only(left: 16.0),
-        child: new CircleAvatar(
-            child: new Text(
-          this.name[0],
-          style: new TextStyle(fontWeight: FontWeight.bold),
-        )),
+        margin: new EdgeInsets.only(left: 280),
+        child: Card(
+          color: Color(0xFF4F8BFF),
+          elevation: 0.0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                topLeft: new Radius.circular(15.0),
+                topRight: new Radius.circular(15.0),
+                bottomLeft: new Radius.circular(15.0)),
+          ),
+          child: Align(
+            alignment: Alignment.center,
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8.0),
+              child: new Column(
+                children: <Widget>[
+                  new Container(
+                    child: new Text(
+                      text,
+                      style: const TextStyle(
+                          color: Color.fromRGBO(255, 255, 255, 1)),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
       ),
     ];
   }

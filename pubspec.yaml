@@ -49,6 +49,7 @@ flutter:
   assets:
     - assets/credentials.json
     - assets/Happy.png
+    - assets/feelix.png
 
 
   # To add assets to your application, add an assets section, like this:
