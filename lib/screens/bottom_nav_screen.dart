@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mood_tracker/screens/calendar_screen.dart';
 import 'package:mood_tracker/screens/screens.dart';
 
 class BottomNavScreen extends StatefulWidget {
@@ -9,7 +10,7 @@ class BottomNavScreen extends StatefulWidget {
 class _BottomNavScreenState extends State<BottomNavScreen> {
   final List _screens = [
     HomeScreen(),
-    Scaffold(),
+    CalendarScreen(),
     ChatBot(),
     Scaffold(),
     AccountScreen(),
