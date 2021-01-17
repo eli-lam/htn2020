@@ -24,9 +24,10 @@ class Top5Keywords extends StatelessWidget {
     return Container(
       child: UnconstrainedBox(
         child: Card(
-          color: Colors.grey,
+          color: Colors.white,
           elevation: 0.0,
           shape: RoundedRectangleBorder(
+            side: BorderSide(color: Color(0xFF4D77EA)),
             borderRadius: BorderRadius.only(
               topLeft: new Radius.circular(15.0),
               topRight: new Radius.circular(15.0),

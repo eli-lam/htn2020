@@ -30,6 +30,18 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   SliverToBoxAdapter _buildHeader(double screenHeight) {
+    Map<int, Color> color = {
+      50: Color.fromRGBO(117, 119, 151, .1),
+      100: Color.fromRGBO(117, 119, 151, .2),
+      200: Color.fromRGBO(117, 119, 151, .3),
+      300: Color.fromRGBO(117, 119, 151, .4),
+      400: Color.fromRGBO(117, 119, 151, .5),
+      500: Color.fromRGBO(117, 119, 151, .6),
+      600: Color.fromRGBO(117, 119, 151, .7),
+      700: Color.fromRGBO(117, 119, 151, .8),
+      800: Color.fromRGBO(117, 119, 151, .9),
+      900: Color.fromRGBO(117, 119, 151, 1),
+    };
     return SliverToBoxAdapter(
       child: Container(
         padding: const EdgeInsets.symmetric(
@@ -37,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
           horizontal: 16.0,
         ),
         decoration: BoxDecoration(
-          color: Palette.primaryColor,
+          color: MaterialColor(0xFFE5F3FF, color),
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(40.0),
             bottomRight: Radius.circular(40.0),
@@ -46,10 +58,17 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            Center(
+                child: Container(
+              child: Align(
+                  alignment: Alignment.bottomRight,
+                  child: Image.asset('assets/heart_logo.png',
+                      width: 150, height: 150)),
+            )),
             Text(
               'Hi Amy,',
               style: const TextStyle(
-                color: Colors.white,
+                color: Color(0xFF333333),
                 fontSize: 32.0,
                 fontWeight: FontWeight.bold,
                 fontStyle: FontStyle.italic,
@@ -59,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Text(
               'How\'s it going?',
               style: const TextStyle(
-                color: Colors.white,
+                color: Color(0xFF333333),
                 fontSize: 18.0,
               ),
             ),
@@ -77,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             builder: (context) => FeelixButtonScreen()),
                         (Route<dynamic> route) => false);
                   },
-                  color: Colors.black54,
+                  color: Color(0xFF4F8BFF),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
                   ),
@@ -103,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              'Past 7 days',
+              'Mood for Past 7 days',
               style: const TextStyle(
                 fontSize: 18.0,
                 fontWeight: FontWeight.bold,
