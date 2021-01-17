@@ -45,9 +45,7 @@ class _CalendarScreenState extends State<CalendarScreen>
             _buildMoodInfoBox(context),
             Visibility(
               visible: _isShowMoreButtonVisible,
-              child: _calendarController.calendarFormat == CalendarFormat.month
-                  ? _buildReadMoreButton()
-                  : Container(),
+              child: _buildReadMoreButton(),
             ),
             Visibility(
               visible: _isShowingMore,
@@ -144,6 +142,7 @@ class _CalendarScreenState extends State<CalendarScreen>
           );
         },
       ),
+      onVisibleDaysChanged: _onVisibleDaysChanged,
     );
   }
 
@@ -171,7 +170,7 @@ class _CalendarScreenState extends State<CalendarScreen>
             height: MediaQuery.of(context).size.height * 0.115,
             child: Row(
               children: <Widget>[
-                Image.asset('assets/happy.png'),
+                Image.asset('assets/Happy.png'),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(5.0),
@@ -222,7 +221,7 @@ class _CalendarScreenState extends State<CalendarScreen>
               horizontal: 24.0,
             ),
             onPressed: () => {showMore()},
-            color: Colors.black54,
+            color: Color(0xFF4F8BFF),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(25.0),
             ),
@@ -239,7 +238,7 @@ class _CalendarScreenState extends State<CalendarScreen>
 
   void showMore() {
     setState(() {
-      _calendarController.toggleCalendarFormat();
+      _calendarController.setCalendarFormat(CalendarFormat.week);
     });
 
     setState(() {
@@ -247,66 +246,97 @@ class _CalendarScreenState extends State<CalendarScreen>
     });
 
     setState(() {
-      _isShowingMore = !_isShowingMore;
+      _isShowingMore = true;
     });
   }
 
   Container _buildReadMoreInfo() {
     return Container(
-      margin: const EdgeInsets.all(16.0),
-      height: MediaQuery.of(context).size.height * 0.17,
-      decoration: BoxDecoration(
-        color: Palette.secondaryColor,
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      padding: const EdgeInsets.all(12.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            'CHAT HISTORY',
-            style: const TextStyle(
-              fontSize: 12.0,
-              color: Colors.black45,
-              fontWeight: FontWeight.bold,
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 16.0),
+            decoration: BoxDecoration(
+              color: Palette.secondaryColor,
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  'CHAT HISTORY',
+                  style: const TextStyle(
+                    fontSize: 12.0,
+                    color: Colors.black45,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Container(
+                  child: Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 5.0),
+                        child: Image.asset(
+                          'assets/chat_history.jpg',
+                          width: 325,
+                          fit: BoxFit.fitWidth,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
           Container(
-            height: MediaQuery.of(context).size.height * 0.115,
-            child: Row(
+            margin: const EdgeInsets.symmetric(
+              vertical: 10.0,
+              horizontal: 16.0,
+            ),
+            child: Column(
               children: <Widget>[
-                Image.asset('assets/happy.png'),
-                Expanded(
+                Align(
+                  alignment: Alignment.centerLeft,
                   child: Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          'Happy',
-                          style: const TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.01),
-                        Text(
-                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consectetur nec convallis massa cursus. Etiam id.',
-                          style: const TextStyle(
-                            fontSize: 12.0,
-                          ),
-                        ),
-                      ],
+                    padding: EdgeInsets.symmetric(
+                      vertical: 4.0,
+                    ),
+                    child: Text(
+                      'NOTES',
+                      style: const TextStyle(
+                        fontSize: 12.0,
+                        color: Colors.black45,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
+                TextField(
+                  decoration: InputDecoration(
+                    hintMaxLines: 10,
+                    border: const OutlineInputBorder(),
+                  ),
+                )
               ],
             ),
           ),
         ],
       ),
     );
+  }
+
+  CalendarFormat _onVisibleDaysChanged(
+      DateTime first, DateTime last, CalendarFormat format) {
+    if (format == CalendarFormat.month) {
+      setState(() {
+        _isShowMoreButtonVisible = true;
+      });
+      setState(() {
+        _isShowingMore = false;
+      });
+    } else if (format == CalendarFormat.week) {
+      showMore();
+    }
   }
 }

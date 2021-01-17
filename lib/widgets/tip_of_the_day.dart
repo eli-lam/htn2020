@@ -6,7 +6,13 @@ class TipOfTheDay extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
-        Image.asset('assets/happy.png'),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          child: Image.asset(
+            'assets/heart_logo.png',
+            height: 90,
+          ),
+        ),
         Expanded(
           child: Padding(
             padding: const EdgeInsets.all(10.0),

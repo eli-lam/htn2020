@@ -27,7 +27,10 @@ class Top5Keywords extends StatelessWidget {
           color: Colors.white,
           elevation: 0.0,
           shape: RoundedRectangleBorder(
-            side: BorderSide(color: Color(0xFF4D77EA)),
+            side: BorderSide(
+              color: Color(0xFF4D77EA),
+              width: 1.7,
+            ),
             borderRadius: BorderRadius.only(
               topLeft: new Radius.circular(15.0),
               topRight: new Radius.circular(15.0),

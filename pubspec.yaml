@@ -55,7 +55,7 @@ flutter:
     - assets/excited.png
     - assets/frustrated.png
     - assets/guilty.png
-    - assets/happy.png
+    - assets/Happy.png
     - assets/melancholic.png
     - assets/heart_logo.png
     - assets/motivated.png
@@ -64,7 +64,7 @@ flutter:
     - assets/sad.png
     - assets/stressed.png
     - assets/feelix.png
-
+    - assets/chat_history.jpg
 
   # To add assets to your application, add an assets section, like this:
   # assets:

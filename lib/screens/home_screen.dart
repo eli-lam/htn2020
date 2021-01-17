@@ -3,8 +3,7 @@ import 'package:mood_tracker/config/palette.dart';
 import 'package:mood_tracker/config/styles.dart';
 import 'package:mood_tracker/widgets/tip_of_the_day.dart';
 import 'package:mood_tracker/widgets/widgets.dart';
-
-import 'screens.dart';
+import 'package:mood_tracker/screens/screens.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -58,13 +57,16 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Center(
-                child: Container(
-              child: Align(
-                  alignment: Alignment.bottomRight,
-                  child: Image.asset('assets/heart_logo.png',
-                      width: 150, height: 150)),
-            )),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                Image.asset(
+                  'assets/heart_logo.png',
+                  width: 150,
+                  height: 150,
+                ),
+              ],
+            ),
             Text(
               'Hi Amy,',
               style: const TextStyle(

@@ -10,7 +10,7 @@ class PastWeekCards extends StatelessWidget {
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: <Widget>[
-          _buildDailyCard('assets/happy.png', '17', context),
+          _buildDailyCard('assets/Happy.png', '17', context),
           _buildDailyCard('assets/anxious.png', '16', context),
           _buildDailyCard('assets/proud.png', '15', context),
           _buildDailyCard('assets/angry.png', '14', context),
