@@ -13,8 +13,22 @@ CollectionReference collectionReference =
 class _ReportScreenState extends State<ReportScreen> {
   @override
   Widget build(BuildContext context) {
+    Map<int, Color> color = {
+      50: Color.fromRGBO(117, 119, 151, .1),
+      100: Color.fromRGBO(117, 119, 151, .2),
+      200: Color.fromRGBO(117, 119, 151, .3),
+      300: Color.fromRGBO(117, 119, 151, .4),
+      400: Color.fromRGBO(117, 119, 151, .5),
+      500: Color.fromRGBO(117, 119, 151, .6),
+      600: Color.fromRGBO(117, 119, 151, .7),
+      700: Color.fromRGBO(117, 119, 151, .8),
+      800: Color.fromRGBO(117, 119, 151, .9),
+      900: Color.fromRGBO(117, 119, 151, 1),
+    };
     return Scaffold(
-        appBar: AppBar(title: Text('Weekly Report')),
+        appBar: AppBar(
+            title: Text('Weekly Report'),
+            backgroundColor: MaterialColor(0xFF757797, color)),
         body: StreamBuilder<QuerySnapshot>(
           // define a StreamBuilder of type QuerySnapshot
           stream: collectionReference
