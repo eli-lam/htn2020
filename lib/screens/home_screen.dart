@@ -3,7 +3,6 @@ import 'package:mood_tracker/config/palette.dart';
 import 'package:mood_tracker/config/styles.dart';
 import 'package:mood_tracker/widgets/tip_of_the_day.dart';
 import 'package:mood_tracker/widgets/widgets.dart';
-import 'package:mood_tracker/screens/screens.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
